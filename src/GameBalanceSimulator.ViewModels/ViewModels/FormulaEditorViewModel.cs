@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GameBalanceSimulator.Core.Formulas;
@@ -14,12 +15,15 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
     private readonly StatEditorViewModel _statEditor;
 
     [ObservableProperty]
+    [Range(0, double.MaxValue)]
     private double _defenseMin;
 
     [ObservableProperty]
+    [Range(0, double.MaxValue)]
     private double _defenseMax = 200;
 
     [ObservableProperty]
+    [Range(0.1, double.MaxValue)]
     private double _defenseStep = 1;
 
     [ObservableProperty]

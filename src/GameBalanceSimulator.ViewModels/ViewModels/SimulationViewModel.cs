@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GameBalanceSimulator.Core.Models;
@@ -14,10 +15,12 @@ public sealed partial class SimulationViewModel : ViewModelBase
     private CancellationTokenSource? _cancellationTokenSource;
 
     [ObservableProperty]
+    [Range(1, int.MaxValue)]
     private int _iterationCount = 10000;
 
     [ObservableProperty]
-    private int? _seed;
+    [Range(0, int.MaxValue)]
+    private int _seed;
 
     [ObservableProperty]
     private bool _simulateUntilDeath = true;

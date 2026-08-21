@@ -9,4 +9,4 @@ public sealed record SimulationConfig(
     int IterationCount,
     string FormulaName,
     bool SimulateUntilDeath,
-    int? Seed = null);
+    int Seed = 0);

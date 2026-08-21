@@ -20,8 +20,8 @@ public sealed class MonteCarloBattleSimulator : IBattleSimulator
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(config.IterationCount);
 
-        var random = config.Seed.HasValue
-            ? new SystemRandomProvider(config.Seed.Value)
+        var random = config.Seed > 0
+            ? new SystemRandomProvider(config.Seed)
             : new SystemRandomProvider();
 
         var iterationCount = config.IterationCount;

@@ -12,6 +12,8 @@ public sealed class TrueDamageFormula : IDamageFormula
 
     public string Description => "Formula_TrueDamage_Description";
 
+    public IReadOnlyList<FormulaParameter> Parameters { get; } = Array.Empty<FormulaParameter>();
+
     public DamageResult Calculate(StatBlock attacker, StatBlock defender, IRandomProvider random)
     {
         var isDodged = random.NextDouble() < defender.DodgeRate;

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -43,6 +44,8 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
 
     public IReadOnlyList<IDamageFormula> AvailableFormulas => _formulaProvider.AvailableFormulas;
 
+    public IReadOnlyList<FormulaParameter> Parameters => _formulaProvider.CurrentFormula.Parameters;
+
     public IDamageFormula SelectedFormula
     {
         get => _formulaProvider.CurrentFormula;
@@ -60,11 +63,14 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
 
         _formulaProvider.CurrentFormulaChanged += (_, _) =>
         {
+            OnPropertyChanged(nameof(Parameters));
+            WireParameterEvents();
             UpdateDescription();
             GenerateCurves();
         };
         _localizationService.CultureChanged += (_, _) => UpdateDescription();
 
+        WireParameterEvents();
         UpdateDescription();
         GenerateCurves();
     }
@@ -112,5 +118,21 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
     private void UpdateDescription()
     {
         SelectedFormulaDescription = _localizationService.GetString(_formulaProvider.CurrentFormula.Description);
+    }
+
+    private void WireParameterEvents()
+    {
+        foreach (var parameter in Parameters)
+        {
+            parameter.PropertyChanged += OnParameterPropertyChanged;
+        }
+    }
+
+    private void OnParameterPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(FormulaParameter.Value))
+        {
+            GenerateCurves();
+        }
     }
 }

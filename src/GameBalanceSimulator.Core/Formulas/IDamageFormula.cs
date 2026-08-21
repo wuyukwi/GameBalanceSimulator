@@ -9,6 +9,8 @@ public interface IDamageFormula
 
     string Description { get; }
 
+    IReadOnlyList<FormulaParameter> Parameters { get; }
+
     /// <summary>
     /// Calculates a single stochastic damage roll.
     /// </summary>

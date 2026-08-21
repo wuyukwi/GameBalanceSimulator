@@ -8,9 +8,28 @@ namespace GameBalanceSimulator.Core.Formulas;
 /// </summary>
 public sealed class PercentageReductionDamageFormula : IDamageFormula
 {
+    private const double DefaultReductionScale = 100.0;
+    private const double MinimumDamageMultiplier = 0.1;
+
     public string Name => "PercentageReduction";
 
     public string Description => "Formula_PercentageReduction_Description";
+
+    public IReadOnlyList<FormulaParameter> Parameters { get; }
+
+    public PercentageReductionDamageFormula()
+    {
+        Parameters = new List<FormulaParameter>
+        {
+            new(
+                "ReductionScale",
+                DefaultReductionScale,
+                1,
+                10000,
+                1,
+                "FormulaParameter_ReductionScale")
+        };
+    }
 
     public DamageResult Calculate(StatBlock attacker, StatBlock defender, IRandomProvider random)
     {
@@ -30,9 +49,9 @@ public sealed class PercentageReductionDamageFormula : IDamageFormula
     public double CalculateBase(StatBlock attacker, StatBlock defender)
     {
         var effectiveDefense = Math.Max(0, defender.Defense - attacker.ArmorPenetration);
-        const double reductionScale = 100.0;
+        var reductionScale = Parameters[0].Value;
         var reduction = effectiveDefense / (effectiveDefense + reductionScale);
-        var multiplier = Math.Max(0.1, 1.0 - reduction);
+        var multiplier = Math.Max(MinimumDamageMultiplier, 1.0 - reduction);
 
         return Math.Max(1, attacker.BaseAttack * multiplier);
     }

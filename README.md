@@ -16,8 +16,12 @@ Game Balance Simulator helps you explore how different stats and damage formulas
 - **Damage Formula Presets**:
   - Subtractive armor model: `Damage = max(1, Attack - max(0, Defense - Penetration))`
   - Multiplicative armor model: `Damage = Attack * Attack / (Attack + max(0, Defense - Penetration))`
-- **Formula Visualization**: Plot expected damage and time-to-kill (TTK) curves as defense varies.
-- **Monte Carlo Simulation**: Run thousands of combat iterations to obtain statistical results including average damage, max/min damage, average TTK, critical rate, and dodge rate.
+  - Percentage reduction model: `Damage = Attack * max(0.1, 1 - Defense / (Defense + 100))`
+  - True damage model: ignores defense and armor penetration
+- **Formula Visualization**: Plot expected damage and time-to-kill (TTK) curves as defense varies, with a localized formula description shown in the UI.
+- **Monte Carlo Simulation**: Run thousands of combat iterations to obtain statistical results including average damage, max/min damage, average TTK, critical rate, and dodge rate. Results include a damage distribution histogram.
+- **Save / Load Configuration**: Persist and restore simulation setups through the File menu.
+- **Input Validation**: All numeric inputs use range validation via `ObservableValidator`.
 - **Multilingual UI**: Supports English, Chinese, and Japanese with runtime language switching. New languages can be added by adding a resource dictionary.
 - **MVVM Architecture**: Built with `CommunityToolkit.Mvvm` for clean separation between Model, ViewModel, and View.
 

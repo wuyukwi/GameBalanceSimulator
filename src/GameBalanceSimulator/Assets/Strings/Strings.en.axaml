@@ -52,4 +52,6 @@
     <system:String x:Key="Formula_PercentageReduction_Description">Percentage reduction: damage = attack * (1 - defense / (defense + 100)), minimum 10%.</system:String>
     <system:String x:Key="Formula_TrueDamage">True Damage</system:String>
     <system:String x:Key="Formula_TrueDamage_Description">True damage: ignores defense and penetration completely.</system:String>
+
+    <system:String x:Key="FormulaParameter_ReductionScale">Reduction Scale</system:String>
 </ResourceDictionary>

@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -44,7 +45,7 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
 
     public IReadOnlyList<IDamageFormula> AvailableFormulas => _formulaProvider.AvailableFormulas;
 
-    public IReadOnlyList<FormulaParameter> Parameters => _formulaProvider.CurrentFormula.Parameters;
+    public ObservableCollection<FormulaParameterViewModel> Parameters { get; } = new();
 
     public IDamageFormula SelectedFormula
     {
@@ -63,14 +64,17 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
 
         _formulaProvider.CurrentFormulaChanged += (_, _) =>
         {
-            OnPropertyChanged(nameof(Parameters));
-            WireParameterEvents();
+            RefreshParameters();
             UpdateDescription();
             GenerateCurves();
         };
-        _localizationService.CultureChanged += (_, _) => UpdateDescription();
+        _localizationService.CultureChanged += (_, _) =>
+        {
+            UpdateDescription();
+            UpdateParameterDisplayNames();
+        };
 
-        WireParameterEvents();
+        RefreshParameters();
         UpdateDescription();
         GenerateCurves();
     }
@@ -120,17 +124,34 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
         SelectedFormulaDescription = _localizationService.GetString(_formulaProvider.CurrentFormula.Description);
     }
 
-    private void WireParameterEvents()
+    private void RefreshParameters()
     {
         foreach (var parameter in Parameters)
         {
-            parameter.PropertyChanged += OnParameterPropertyChanged;
+            parameter.PropertyChanged -= OnParameterPropertyChanged;
+        }
+
+        Parameters.Clear();
+
+        foreach (var parameter in _formulaProvider.CurrentFormula.Parameters)
+        {
+            var viewModel = new FormulaParameterViewModel(parameter, _localizationService);
+            viewModel.PropertyChanged += OnParameterPropertyChanged;
+            Parameters.Add(viewModel);
+        }
+    }
+
+    private void UpdateParameterDisplayNames()
+    {
+        foreach (var parameter in Parameters)
+        {
+            parameter.UpdateDisplayName();
         }
     }
 
     private void OnParameterPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(FormulaParameter.Value))
+        if (e.PropertyName == nameof(FormulaParameterViewModel.Value))
         {
             GenerateCurves();
         }

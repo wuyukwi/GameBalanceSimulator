@@ -2,9 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="GameBalanceSimulator.Views.FormulaEditorView"
              xmlns:vm="using:GameBalanceSimulator.ViewModels.ViewModels"
-             xmlns:scottplot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
-             xmlns:formulas="using:GameBalanceSimulator.Core.Formulas"
-             x:DataType="vm:FormulaEditorViewModel">
+              xmlns:scottplot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+              x:DataType="vm:FormulaEditorViewModel">
   <Grid RowDefinitions="Auto,*,*">
     <StackPanel Grid.Row="0" Spacing="4" Margin="8">
       <TextBlock Text="{DynamicResource FormulaEditor_Title}"
@@ -20,9 +19,9 @@
                  Opacity="0.8" />
       <ItemsControl ItemsSource="{Binding Parameters}">
         <ItemsControl.ItemTemplate>
-          <DataTemplate x:DataType="formulas:FormulaParameter">
+          <DataTemplate x:DataType="vm:FormulaParameterViewModel">
             <StackPanel Margin="0 4 0 0">
-              <TextBlock Text="{Binding Name}" />
+              <TextBlock Text="{Binding DisplayName}" />
               <NumericUpDown Value="{Binding Value}"
                              Minimum="{Binding Minimum}"
                              Maximum="{Binding Maximum}"

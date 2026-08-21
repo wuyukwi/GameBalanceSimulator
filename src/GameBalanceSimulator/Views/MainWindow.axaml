@@ -12,8 +12,15 @@
         Width="1200"
         Height="800">
 
-  <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="300,*,320">
-    <Border Grid.Row="0"
+  <Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="300,*,320">
+    <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+      <MenuItem Header="{DynamicResource Menu_File}">
+        <MenuItem Header="{DynamicResource Menu_SaveConfig}" Command="{Binding SaveConfigCommand}" />
+        <MenuItem Header="{DynamicResource Menu_LoadConfig}" Command="{Binding LoadConfigCommand}" />
+      </MenuItem>
+    </Menu>
+
+    <Border Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"
@@ -21,25 +28,25 @@
       <views:SettingsView DataContext="{Binding Settings}" />
     </Border>
 
-    <Border Grid.Row="1"
+    <Border Grid.Row="2"
             Grid.Column="0"
             BorderBrush="{DynamicResource SystemBaseMediumLowColor}"
             BorderThickness="0 0 1 0">
       <views:StatEditorView DataContext="{Binding StatEditor}" />
     </Border>
 
-    <Border Grid.Row="1"
+    <Border Grid.Row="2"
             Grid.Column="1"
             BorderBrush="{DynamicResource SystemBaseMediumLowColor}"
             BorderThickness="0 0 1 0">
       <views:FormulaEditorView DataContext="{Binding FormulaEditor}" />
     </Border>
 
-    <Border Grid.Row="1" Grid.Column="2">
+    <Border Grid.Row="2" Grid.Column="2">
       <views:SimulationView DataContext="{Binding Simulation}" />
     </Border>
 
-    <Border Grid.Row="2"
+    <Border Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"

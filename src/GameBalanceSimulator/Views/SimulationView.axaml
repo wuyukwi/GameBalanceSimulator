@@ -3,6 +3,7 @@
              x:Class="GameBalanceSimulator.Views.SimulationView"
              xmlns:vm="using:GameBalanceSimulator.ViewModels.ViewModels"
              xmlns:converters="using:Avalonia.Data.Converters"
+             xmlns:scottplot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
              x:DataType="vm:SimulationViewModel">
   <ScrollViewer>
     <StackPanel Spacing="8" Margin="8">
@@ -51,6 +52,12 @@
         <TextBlock Text="{DynamicResource Simulation_DodgeRate}" FontWeight="Bold" />
         <TextBlock Text="{Binding Report.DodgeRate, StringFormat='{}{0:P2}', FallbackValue=0}" />
       </StackPanel>
+
+      <Border IsVisible="{Binding Report, Converter={x:Static converters:ObjectConverters.IsNotNull}}"
+              Height="200"
+              Margin="0 8 0 0">
+        <scottplot:AvaPlot x:Name="HistogramPlot" />
+      </Border>
     </StackPanel>
   </ScrollViewer>
 </UserControl>

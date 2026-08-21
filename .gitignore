@@ -1,0 +1,28 @@
+# .NET build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+
+# NuGet
+*.nupkg
+
+# Avalonia
+.avalonia/
+
+# OpenCode / CodeGraph local metadata
+.omo/
+.codegraph/
+
+# OS files
+.DS_Store
+Thumbs.db

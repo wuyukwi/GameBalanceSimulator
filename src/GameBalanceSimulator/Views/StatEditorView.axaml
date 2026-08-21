@@ -1,0 +1,67 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="GameBalanceSimulator.Views.StatEditorView"
+             xmlns:vm="using:GameBalanceSimulator.ViewModels.ViewModels"
+             x:DataType="vm:StatEditorViewModel">
+  <Grid ColumnDefinitions="*,*" Margin="8">
+    <Border Grid.Column="0"
+            BorderBrush="{DynamicResource SystemBaseMediumLowColor}"
+            BorderThickness="1"
+            CornerRadius="4"
+            Padding="8"
+            Margin="0 0 4 0">
+      <StackPanel Spacing="4">
+        <TextBlock Text="{DynamicResource StatEditor_Attacker}"
+                   FontWeight="Bold"
+                   FontSize="16"
+                   Margin="0 0 0 8" />
+        <TextBlock Text="{DynamicResource StatEditor_BaseAttack}" />
+        <NumericUpDown Value="{Binding Attacker.BaseAttack}" Increment="1" Minimum="0" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_Defense}" />
+        <NumericUpDown Value="{Binding Attacker.Defense}" Increment="1" Minimum="0" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_CriticalRate}" />
+        <NumericUpDown Value="{Binding Attacker.CriticalRate}" Increment="0.01" Minimum="0" Maximum="1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_CriticalDamage}" />
+        <NumericUpDown Value="{Binding Attacker.CriticalDamage}" Increment="0.1" Minimum="1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_DodgeRate}" />
+        <NumericUpDown Value="{Binding Attacker.DodgeRate}" Increment="0.01" Minimum="0" Maximum="1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_ArmorPenetration}" />
+        <NumericUpDown Value="{Binding Attacker.ArmorPenetration}" Increment="1" Minimum="0" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_AttackInterval}" />
+        <NumericUpDown Value="{Binding Attacker.AttackInterval}" Increment="0.1" Minimum="0.1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_MaxHealth}" />
+        <NumericUpDown Value="{Binding Attacker.MaxHealth}" Increment="10" Minimum="1" FormatString="0.##" />
+      </StackPanel>
+    </Border>
+
+    <Border Grid.Column="1"
+            BorderBrush="{DynamicResource SystemBaseMediumLowColor}"
+            BorderThickness="1"
+            CornerRadius="4"
+            Padding="8"
+            Margin="4 0 0 0">
+      <StackPanel Spacing="4">
+        <TextBlock Text="{DynamicResource StatEditor_Defender}"
+                   FontWeight="Bold"
+                   FontSize="16"
+                   Margin="0 0 0 8" />
+        <TextBlock Text="{DynamicResource StatEditor_BaseAttack}" />
+        <NumericUpDown Value="{Binding Defender.BaseAttack}" Increment="1" Minimum="0" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_Defense}" />
+        <NumericUpDown Value="{Binding Defender.Defense}" Increment="1" Minimum="0" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_CriticalRate}" />
+        <NumericUpDown Value="{Binding Defender.CriticalRate}" Increment="0.01" Minimum="0" Maximum="1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_CriticalDamage}" />
+        <NumericUpDown Value="{Binding Defender.CriticalDamage}" Increment="0.1" Minimum="1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_DodgeRate}" />
+        <NumericUpDown Value="{Binding Defender.DodgeRate}" Increment="0.01" Minimum="0" Maximum="1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_ArmorPenetration}" />
+        <NumericUpDown Value="{Binding Defender.ArmorPenetration}" Increment="1" Minimum="0" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_AttackInterval}" />
+        <NumericUpDown Value="{Binding Defender.AttackInterval}" Increment="0.1" Minimum="0.1" FormatString="0.##" />
+        <TextBlock Text="{DynamicResource StatEditor_MaxHealth}" />
+        <NumericUpDown Value="{Binding Defender.MaxHealth}" Increment="10" Minimum="1" FormatString="0.##" />
+      </StackPanel>
+    </Border>
+  </Grid>
+</UserControl>

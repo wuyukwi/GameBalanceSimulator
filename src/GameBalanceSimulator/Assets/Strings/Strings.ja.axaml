@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="MainWindow_Title">ゲームバランスシミュレーター</system:String>
+
+    <system:String x:Key="StatEditor_Attacker">攻撃側</system:String>
+    <system:String x:Key="StatEditor_Defender">防御側</system:String>
+    <system:String x:Key="StatEditor_BaseAttack">基礎攻撃力</system:String>
+    <system:String x:Key="StatEditor_Defense">防御力</system:String>
+    <system:String x:Key="StatEditor_CriticalRate">会心率</system:String>
+    <system:String x:Key="StatEditor_CriticalDamage">会心ダメージ</system:String>
+    <system:String x:Key="StatEditor_DodgeRate">回避率</system:String>
+    <system:String x:Key="StatEditor_ArmorPenetration">装甲貫通</system:String>
+    <system:String x:Key="StatEditor_AttackInterval">攻撃間隔</system:String>
+    <system:String x:Key="StatEditor_MaxHealth">最大HP</system:String>
+
+    <system:String x:Key="FormulaEditor_Title">公式と曲線</system:String>
+    <system:String x:Key="FormulaEditor_SelectedFormula">ダメージ公式</system:String>
+    <system:String x:Key="FormulaEditor_DefenseMin">防御最小値</system:String>
+    <system:String x:Key="FormulaEditor_DefenseMax">防御最大値</system:String>
+    <system:String x:Key="FormulaEditor_DefenseStep">防御ステップ</system:String>
+    <system:String x:Key="FormulaEditor_GenerateCurve">曲線を生成</system:String>
+    <system:String x:Key="FormulaEditor_DamageCurve">期待ダメージ曲線</system:String>
+    <system:String x:Key="FormulaEditor_TTKCurve">撃破所要ターン曲線</system:String>
+
+    <system:String x:Key="Simulation_Title">モンテカルロシミュレーション</system:String>
+    <system:String x:Key="Simulation_IterationCount">試行回数</system:String>
+    <system:String x:Key="Simulation_Seed">乱数シード</system:String>
+    <system:String x:Key="Simulation_SimulateUntilDeath">撃破までシミュレート</system:String>
+    <system:String x:Key="Simulation_Start">開始</system:String>
+    <system:String x:Key="Simulation_Cancel">キャンセル</system:String>
+    <system:String x:Key="Simulation_AverageDamage">平均ダメージ</system:String>
+    <system:String x:Key="Simulation_MaxDamage">最大ダメージ</system:String>
+    <system:String x:Key="Simulation_MinDamage">最小ダメージ</system:String>
+    <system:String x:Key="Simulation_AverageTTK">平均TTK</system:String>
+    <system:String x:Key="Simulation_CriticalRate">会心率</system:String>
+    <system:String x:Key="Simulation_DodgeRate">回避率</system:String>
+
+    <system:String x:Key="Settings_Title">設定</system:String>
+    <system:String x:Key="Settings_Language">言語</system:String>
+
+    <system:String x:Key="Formula_Subtractive">減算モデル</system:String>
+    <system:String x:Key="Formula_Multiplicative">乗算モデル</system:String>
+</ResourceDictionary>

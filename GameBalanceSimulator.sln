@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{23903F0D-2C5A-4C09-A07F-E611FA1A19AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBalanceSimulator", "src\GameBalanceSimulator\GameBalanceSimulator.csproj", "{CCF36C00-5228-45E0-A03D-7D85FED200BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBalanceSimulator.Core", "src\GameBalanceSimulator.Core\GameBalanceSimulator.Core.csproj", "{967434CA-569B-4F96-BBF4-35CD2D29400C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBalanceSimulator.ViewModels", "src\GameBalanceSimulator.ViewModels\GameBalanceSimulator.ViewModels.csproj", "{C8F737E1-5ED3-4CEE-B324-AE81090DB4BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0FB61CBE-824E-491F-9FE9-FFF837B902BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBalanceSimulator.Core.Tests", "tests\GameBalanceSimulator.Core.Tests\GameBalanceSimulator.Core.Tests.csproj", "{A5BC19E8-9805-4367-A2BA-AD417A4B71CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCF36C00-5228-45E0-A03D-7D85FED200BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCF36C00-5228-45E0-A03D-7D85FED200BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCF36C00-5228-45E0-A03D-7D85FED200BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCF36C00-5228-45E0-A03D-7D85FED200BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967434CA-569B-4F96-BBF4-35CD2D29400C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967434CA-569B-4F96-BBF4-35CD2D29400C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967434CA-569B-4F96-BBF4-35CD2D29400C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967434CA-569B-4F96-BBF4-35CD2D29400C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8F737E1-5ED3-4CEE-B324-AE81090DB4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8F737E1-5ED3-4CEE-B324-AE81090DB4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8F737E1-5ED3-4CEE-B324-AE81090DB4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8F737E1-5ED3-4CEE-B324-AE81090DB4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BC19E8-9805-4367-A2BA-AD417A4B71CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BC19E8-9805-4367-A2BA-AD417A4B71CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BC19E8-9805-4367-A2BA-AD417A4B71CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BC19E8-9805-4367-A2BA-AD417A4B71CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CCF36C00-5228-45E0-A03D-7D85FED200BF} = {23903F0D-2C5A-4C09-A07F-E611FA1A19AF}
+		{967434CA-569B-4F96-BBF4-35CD2D29400C} = {23903F0D-2C5A-4C09-A07F-E611FA1A19AF}
+		{C8F737E1-5ED3-4CEE-B324-AE81090DB4BA} = {23903F0D-2C5A-4C09-A07F-E611FA1A19AF}
+		{A5BC19E8-9805-4367-A2BA-AD417A4B71CF} = {0FB61CBE-824E-491F-9FE9-FFF837B902BD}
+	EndGlobalSection
+EndGlobal

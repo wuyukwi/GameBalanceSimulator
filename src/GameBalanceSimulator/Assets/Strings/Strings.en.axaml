@@ -1,0 +1,44 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="MainWindow_Title">Game Balance Simulator</system:String>
+
+    <system:String x:Key="StatEditor_Attacker">Attacker</system:String>
+    <system:String x:Key="StatEditor_Defender">Defender</system:String>
+    <system:String x:Key="StatEditor_BaseAttack">Base Attack</system:String>
+    <system:String x:Key="StatEditor_Defense">Defense</system:String>
+    <system:String x:Key="StatEditor_CriticalRate">Critical Rate</system:String>
+    <system:String x:Key="StatEditor_CriticalDamage">Critical Damage</system:String>
+    <system:String x:Key="StatEditor_DodgeRate">Dodge Rate</system:String>
+    <system:String x:Key="StatEditor_ArmorPenetration">Armor Penetration</system:String>
+    <system:String x:Key="StatEditor_AttackInterval">Attack Interval</system:String>
+    <system:String x:Key="StatEditor_MaxHealth">Max Health</system:String>
+
+    <system:String x:Key="FormulaEditor_Title">Formula &amp; Curves</system:String>
+    <system:String x:Key="FormulaEditor_SelectedFormula">Damage Formula</system:String>
+    <system:String x:Key="FormulaEditor_DefenseMin">Defense Min</system:String>
+    <system:String x:Key="FormulaEditor_DefenseMax">Defense Max</system:String>
+    <system:String x:Key="FormulaEditor_DefenseStep">Defense Step</system:String>
+    <system:String x:Key="FormulaEditor_GenerateCurve">Generate Curves</system:String>
+    <system:String x:Key="FormulaEditor_DamageCurve">Expected Damage</system:String>
+    <system:String x:Key="FormulaEditor_TTKCurve">TTK (Turns)</system:String>
+
+    <system:String x:Key="Simulation_Title">Monte Carlo Simulation</system:String>
+    <system:String x:Key="Simulation_IterationCount">Iterations</system:String>
+    <system:String x:Key="Simulation_Seed">Random Seed</system:String>
+    <system:String x:Key="Simulation_SimulateUntilDeath">Simulate Until Death</system:String>
+    <system:String x:Key="Simulation_Start">Start</system:String>
+    <system:String x:Key="Simulation_Cancel">Cancel</system:String>
+    <system:String x:Key="Simulation_AverageDamage">Average Damage</system:String>
+    <system:String x:Key="Simulation_MaxDamage">Max Damage</system:String>
+    <system:String x:Key="Simulation_MinDamage">Min Damage</system:String>
+    <system:String x:Key="Simulation_AverageTTK">Average TTK</system:String>
+    <system:String x:Key="Simulation_CriticalRate">Critical Rate</system:String>
+    <system:String x:Key="Simulation_DodgeRate">Dodge Rate</system:String>
+
+    <system:String x:Key="Settings_Title">Settings</system:String>
+    <system:String x:Key="Settings_Language">Language</system:String>
+
+    <system:String x:Key="Formula_Subtractive">Subtractive</system:String>
+    <system:String x:Key="Formula_Multiplicative">Multiplicative</system:String>
+</ResourceDictionary>

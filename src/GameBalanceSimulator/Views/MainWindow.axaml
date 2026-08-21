@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GameBalanceSimulator.ViewModels.ViewModels"
+        xmlns:views="using:GameBalanceSimulator.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="GameBalanceSimulator.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{DynamicResource MainWindow_Title}"
+        Width="1200"
+        Height="800">
+
+  <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="300,*,320">
+    <Border Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+            Padding="8">
+      <views:SettingsView DataContext="{Binding Settings}" />
+    </Border>
+
+    <Border Grid.Row="1"
+            Grid.Column="0"
+            BorderBrush="{DynamicResource SystemBaseMediumLowColor}"
+            BorderThickness="0 0 1 0">
+      <views:StatEditorView DataContext="{Binding StatEditor}" />
+    </Border>
+
+    <Border Grid.Row="1"
+            Grid.Column="1"
+            BorderBrush="{DynamicResource SystemBaseMediumLowColor}"
+            BorderThickness="0 0 1 0">
+      <views:FormulaEditorView DataContext="{Binding FormulaEditor}" />
+    </Border>
+
+    <Border Grid.Row="1" Grid.Column="2">
+      <views:SimulationView DataContext="{Binding Simulation}" />
+    </Border>
+
+    <Border Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Background="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+            Padding="8">
+      <TextBlock Text="Game Balance Simulator"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center" />
+    </Border>
+  </Grid>
+</Window>

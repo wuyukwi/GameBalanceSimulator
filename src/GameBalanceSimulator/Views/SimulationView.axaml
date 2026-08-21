@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="GameBalanceSimulator.Views.SimulationView"
+             xmlns:vm="using:GameBalanceSimulator.ViewModels.ViewModels"
+             xmlns:converters="using:Avalonia.Data.Converters"
+             x:DataType="vm:SimulationViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="8" Margin="8">
+      <TextBlock Text="{DynamicResource Simulation_Title}"
+                 FontWeight="Bold"
+                 FontSize="16" />
+
+      <TextBlock Text="{DynamicResource Simulation_IterationCount}" />
+      <NumericUpDown Value="{Binding IterationCount}" Increment="1000" Minimum="1" FormatString="0" />
+
+      <TextBlock Text="{DynamicResource Simulation_Seed}" />
+      <NumericUpDown Value="{Binding Seed}" Increment="1" Minimum="0" FormatString="0" />
+
+      <CheckBox Content="{DynamicResource Simulation_SimulateUntilDeath}"
+                IsChecked="{Binding SimulateUntilDeath}" />
+
+      <ProgressBar Value="{Binding ProgressValue}"
+                   Maximum="{Binding ProgressMaximum}"
+                   Height="20" />
+
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <Button Content="{DynamicResource Simulation_Start}"
+                Command="{Binding StartSimulationCommand}" />
+        <Button Content="{DynamicResource Simulation_Cancel}"
+                Command="{Binding CancelSimulationCommand}" />
+      </StackPanel>
+
+      <StackPanel Spacing="4" IsVisible="{Binding Report, Converter={x:Static converters:ObjectConverters.IsNotNull}}">
+        <TextBlock Text="{DynamicResource Simulation_AverageDamage}" FontWeight="Bold" />
+        <TextBlock Text="{Binding Report.AverageDamage, StringFormat='{}{0:F2}', FallbackValue=0}" />
+
+        <TextBlock Text="{DynamicResource Simulation_MaxDamage}" FontWeight="Bold" />
+        <TextBlock Text="{Binding Report.MaxDamage, StringFormat='{}{0:F2}', FallbackValue=0}" />
+
+        <TextBlock Text="{DynamicResource Simulation_MinDamage}" FontWeight="Bold" />
+        <TextBlock Text="{Binding Report.MinDamage, StringFormat='{}{0:F2}', FallbackValue=0}" />
+
+        <TextBlock Text="{DynamicResource Simulation_AverageTTK}" FontWeight="Bold"
+                   IsVisible="{Binding SimulateUntilDeath}" />
+        <TextBlock Text="{Binding Report.AverageTtk, StringFormat='{}{0:F2}', FallbackValue=0}"
+                   IsVisible="{Binding SimulateUntilDeath}" />
+
+        <TextBlock Text="{DynamicResource Simulation_CriticalRate}" FontWeight="Bold" />
+        <TextBlock Text="{Binding Report.CriticalRate, StringFormat='{}{0:P2}', FallbackValue=0}" />
+
+        <TextBlock Text="{DynamicResource Simulation_DodgeRate}" FontWeight="Bold" />
+        <TextBlock Text="{Binding Report.DodgeRate, StringFormat='{}{0:P2}', FallbackValue=0}" />
+      </StackPanel>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

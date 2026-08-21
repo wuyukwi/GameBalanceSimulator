@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="GameBalanceSimulator.Views.SettingsView"
+             xmlns:vm="using:GameBalanceSimulator.ViewModels.ViewModels"
+             x:DataType="vm:SettingsViewModel">
+  <StackPanel Orientation="Horizontal" Spacing="8" Margin="8" VerticalAlignment="Center">
+    <TextBlock Text="{DynamicResource Settings_Title}" FontWeight="Bold" VerticalAlignment="Center" />
+    <TextBlock Text="{DynamicResource Settings_Language}" VerticalAlignment="Center" />
+    <ComboBox ItemsSource="{Binding SupportedCultures}"
+              SelectedItem="{Binding SelectedCulture}"
+              DisplayMemberBinding="{Binding NativeName}" />
+  </StackPanel>
+</UserControl>

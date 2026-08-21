@@ -1,6 +1,7 @@
 # .NET build outputs
 bin/
 obj/
+publish/
 *.dll
 *.exe
 *.pdb

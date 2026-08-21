@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run GameBalanceSimulator",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/GameBalanceSimulator/bin/Debug/net8.0/GameBalanceSimulator.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/GameBalanceSimulator",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
+    ]
+}

@@ -63,6 +63,22 @@ GameBalanceSimulator/
 ### Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
+- (Optional) [PowerShell 7+](https://github.com/PowerShell/PowerShell) or a POSIX shell for convenience scripts
+- (Optional) [Visual Studio Code](https://code.visualstudio.com/) with the C# Dev Kit extension
+
+### Quick Start
+
+The fastest way to run the application is using the provided convenience scripts:
+
+**Windows (PowerShell):**
+```powershell
+.\scripts\run.ps1
+```
+
+**macOS / Linux:**
+```bash
+./scripts/run.sh
+```
 
 ### Build
 
@@ -70,7 +86,15 @@ GameBalanceSimulator/
 dotnet build
 ```
 
+Or build only the desktop project:
+
+```bash
+dotnet build src/GameBalanceSimulator/GameBalanceSimulator.csproj
+```
+
 ### Run
+
+If you prefer to run manually:
 
 ```bash
 dotnet run --project src/GameBalanceSimulator/GameBalanceSimulator.csproj
@@ -78,9 +102,60 @@ dotnet run --project src/GameBalanceSimulator/GameBalanceSimulator.csproj
 
 ### Run Tests
 
+Run all unit tests from the solution root:
+
 ```bash
 dotnet test
 ```
+
+If you want detailed per-test output:
+
+```bash
+dotnet test --verbosity normal
+```
+
+Or use the convenience script:
+
+```powershell
+.\scripts\test.ps1
+```
+
+```bash
+./scripts/test.sh
+```
+
+### Publish a Standalone Executable
+
+To create a single-file executable that does **not** require .NET runtime on the target machine:
+
+**Windows:**
+```powershell
+.\scripts\publish.ps1 -Runtime win-x64 -Output publish
+```
+
+**macOS (Apple Silicon):**
+```bash
+./scripts/publish.sh osx-arm64 publish
+```
+
+**macOS (Intel):**
+```bash
+./scripts/publish.sh osx-x64 publish
+```
+
+**Linux:**
+```bash
+./scripts/publish.sh linux-x64 publish
+```
+
+The output executable will be located at:
+
+- Windows: `publish/GameBalanceSimulator.exe`
+- macOS / Linux: `publish/GameBalanceSimulator`
+
+### Visual Studio Code
+
+If you use VS Code, open the workspace and press `F5` to launch the application. Pre-configured tasks are provided in `.vscode/tasks.json` and `.vscode/launch.json` for build, test, and publish.
 
 ## Localization
 

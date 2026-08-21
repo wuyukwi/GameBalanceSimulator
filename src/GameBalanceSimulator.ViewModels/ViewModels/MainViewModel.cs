@@ -64,13 +64,17 @@ public sealed partial class MainViewModel : ViewModelBase
             path += ".json";
         }
 
+        var formulaParameters = _formulaProvider.CurrentFormula.Parameters
+            .ToDictionary(p => p.Name, p => p.Value);
+
         var config = new SimulationConfig(
             StatEditor.Attacker.ToModel(),
             StatEditor.Defender.ToModel(),
             Simulation.IterationCount,
             _formulaProvider.CurrentFormula.Name,
             Simulation.SimulateUntilDeath,
-            Simulation.Seed);
+            Simulation.Seed,
+            formulaParameters);
 
         await _repository.SaveAsync(config, path);
         await _dialogService.ShowInfoAsync($"Configuration saved to:\n{path}", "Save Configuration");
@@ -110,6 +114,15 @@ public sealed partial class MainViewModel : ViewModelBase
             path += _reportExporter.Extension;
         }
 
+        var outputDirectory = Path.GetDirectoryName(path);
+        if (string.IsNullOrWhiteSpace(outputDirectory))
+        {
+            outputDirectory = Directory.GetCurrentDirectory();
+        }
+
+        var formulaParameters = _formulaProvider.CurrentFormula.Parameters
+            .ToDictionary(p => p.Name, p => p.Value);
+
         var reportData = new ReportData(
             DateTime.Now,
             StatEditor.Attacker.ToModel(),
@@ -128,10 +141,11 @@ public sealed partial class MainViewModel : ViewModelBase
                 Simulation.IterationCount,
                 _formulaProvider.CurrentFormula.Name,
                 Simulation.SimulateUntilDeath,
-                Simulation.Seed),
+                Simulation.Seed,
+                formulaParameters),
             Simulation.Report);
 
-        var content = _reportExporter.Export(reportData);
+        var content = _reportExporter.Export(reportData, outputDirectory);
         await File.WriteAllTextAsync(path, content);
         await _dialogService.ShowInfoAsync($"Report exported to:\n{path}", "Export Report");
     }
@@ -145,6 +159,15 @@ public sealed partial class MainViewModel : ViewModelBase
         if (formula is not null)
         {
             _formulaProvider.CurrentFormula = formula;
+        }
+
+        var parameters = config.FormulaParameters ?? new Dictionary<string, double>();
+        foreach (var parameter in _formulaProvider.CurrentFormula.Parameters)
+        {
+            if (parameters.TryGetValue(parameter.Name, out var value))
+            {
+                parameter.Value = value;
+            }
         }
 
         Simulation.IterationCount = config.IterationCount;

@@ -9,4 +9,5 @@ public sealed record SimulationConfig(
     int IterationCount,
     string FormulaName,
     bool SimulateUntilDeath,
-    int Seed = 0);
+    int Seed = 0,
+    Dictionary<string, double>? FormulaParameters = null);

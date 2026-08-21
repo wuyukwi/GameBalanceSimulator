@@ -6,5 +6,5 @@ public interface IReportExporter
 
     string Extension { get; }
 
-    string Export(ReportData data);
+    string Export(ReportData data, string outputDirectory);
 }

@@ -1,16 +1,28 @@
 using System.Globalization;
 using System.Text;
+using ScottPlot;
 
 namespace GameBalanceSimulator.Core.Reporting;
 
 public sealed class MarkdownReportExporter : IReportExporter
 {
+    private const int ChartWidth = 800;
+    private const int ChartHeight = 400;
+
     public string Format => "Markdown";
 
     public string Extension => ".md";
 
-    public string Export(ReportData data)
+    public string Export(ReportData data, string outputDirectory)
     {
+        Directory.CreateDirectory(outputDirectory);
+
+        var damageCurveFileName = SaveDamageCurve(data, outputDirectory);
+        var ttkCurveFileName = SaveTtkCurve(data, outputDirectory);
+        var histogramFileName = data.SimulationReport?.HistogramBuckets.Count > 0
+            ? SaveHistogram(data, outputDirectory)
+            : null;
+
         var builder = new StringBuilder();
         var timestamp = data.Timestamp.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
@@ -23,10 +35,65 @@ public sealed class MarkdownReportExporter : IReportExporter
         AppendParameters(builder, data);
         AppendStats(builder, "Attacker", data.Attacker);
         AppendStats(builder, "Defender", data.Defender);
+
+        builder.AppendLine("## Damage Curve");
+        builder.AppendLine();
+        builder.AppendLine($"![Damage Curve]({damageCurveFileName})");
+        builder.AppendLine();
+
+        builder.AppendLine("## TTK Curve");
+        builder.AppendLine();
+        builder.AppendLine($"![TTK Curve]({ttkCurveFileName})");
+        builder.AppendLine();
+
         AppendCurveData(builder, data);
-        AppendSimulationResults(builder, data);
+        AppendSimulationResults(builder, data, histogramFileName);
 
         return builder.ToString();
+    }
+
+    private static string SaveDamageCurve(ReportData data, string outputDirectory)
+    {
+        var plot = new Plot();
+        plot.Add.Scatter(data.DamageCurveX, data.DamageCurveY);
+        var fileName = "damage_curve.png";
+        plot.SavePng(Path.Combine(outputDirectory, fileName), ChartWidth, ChartHeight);
+        return fileName;
+    }
+
+    private static string SaveTtkCurve(ReportData data, string outputDirectory)
+    {
+        var plot = new Plot();
+        plot.Add.Scatter(data.TtkCurveX, data.TtkCurveY);
+        var fileName = "ttk_curve.png";
+        plot.SavePng(Path.Combine(outputDirectory, fileName), ChartWidth, ChartHeight);
+        return fileName;
+    }
+
+    private static string SaveHistogram(ReportData data, string outputDirectory)
+    {
+        var report = data.SimulationReport!;
+        var buckets = report.HistogramBuckets;
+        var edges = report.HistogramBinEdges;
+        var bars = new Bar[buckets.Count];
+
+        for (var i = 0; i < buckets.Count; i++)
+        {
+            var center = (edges[i] + edges[i + 1]) / 2.0;
+            var width = edges[i + 1] - edges[i];
+            bars[i] = new Bar
+            {
+                Position = center,
+                Value = buckets[i],
+                Size = width
+            };
+        }
+
+        var plot = new Plot();
+        plot.Add.Bars(bars);
+        var fileName = "damage_histogram.png";
+        plot.SavePng(Path.Combine(outputDirectory, fileName), ChartWidth, ChartHeight);
+        return fileName;
     }
 
     private static void AppendParameters(StringBuilder builder, ReportData data)
@@ -68,7 +135,7 @@ public sealed class MarkdownReportExporter : IReportExporter
 
     private static void AppendCurveData(StringBuilder builder, ReportData data)
     {
-        builder.AppendLine("## Damage Curve");
+        builder.AppendLine("## Curve Data");
         builder.AppendLine();
         builder.AppendLine($"Range: {data.DefenseMin:F2} ~ {data.DefenseMax:F2} (step {data.DefenseStep:F2})");
         builder.AppendLine();
@@ -86,7 +153,7 @@ public sealed class MarkdownReportExporter : IReportExporter
         builder.AppendLine();
     }
 
-    private static void AppendSimulationResults(StringBuilder builder, ReportData data)
+    private static void AppendSimulationResults(StringBuilder builder, ReportData data, string? histogramFileName)
     {
         if (data.SimulationReport is null)
         {
@@ -117,9 +184,11 @@ public sealed class MarkdownReportExporter : IReportExporter
         builder.AppendLine($"| Dodge Rate | {report.DodgeRate:P2} |");
         builder.AppendLine();
 
-        if (report.HistogramBuckets.Count > 0)
+        if (!string.IsNullOrEmpty(histogramFileName))
         {
             builder.AppendLine("## Damage Distribution Histogram");
+            builder.AppendLine();
+            builder.AppendLine($"![Damage Histogram]({histogramFileName})");
             builder.AppendLine();
             builder.AppendLine("| Range Start | Range End | Count |");
             builder.AppendLine("| --- | --- | --- |");

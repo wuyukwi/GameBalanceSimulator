@@ -40,5 +40,11 @@
     <system:String x:Key="Settings_Language">Language</system:String>
 
     <system:String x:Key="Formula_Subtractive">Subtractive</system:String>
+    <system:String x:Key="Formula_Subtractive_Description">Classic subtractive armor: damage = max(1, attack - effective defense).</system:String>
     <system:String x:Key="Formula_Multiplicative">Multiplicative</system:String>
+    <system:String x:Key="Formula_Multiplicative_Description">Division armor model: damage = attack^2 / (attack + effective defense), floored at 1.</system:String>
+    <system:String x:Key="Formula_PercentageReduction">Percentage Reduction</system:String>
+    <system:String x:Key="Formula_PercentageReduction_Description">Percentage reduction: damage = attack * (1 - defense / (defense + 100)), minimum 10%.</system:String>
+    <system:String x:Key="Formula_TrueDamage">True Damage</system:String>
+    <system:String x:Key="Formula_TrueDamage_Description">True damage: ignores defense and penetration completely.</system:String>
 </ResourceDictionary>

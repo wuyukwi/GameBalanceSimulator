@@ -3,12 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 using GameBalanceSimulator.Core.Formulas;
 using GameBalanceSimulator.Core.Models;
 using GameBalanceSimulator.Core.Services;
+using GameBalanceSimulator.ViewModels.Services;
 
 namespace GameBalanceSimulator.ViewModels.ViewModels;
 
 public sealed partial class FormulaEditorViewModel : ViewModelBase
 {
     private readonly IFormulaProvider _formulaProvider;
+    private readonly ILocalizationService _localizationService;
     private readonly StatEditorViewModel _statEditor;
 
     [ObservableProperty]
@@ -32,6 +34,9 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
     [ObservableProperty]
     private double[] _ttkCurveY = Array.Empty<double>();
 
+    [ObservableProperty]
+    private string _selectedFormulaDescription = string.Empty;
+
     public IReadOnlyList<IDamageFormula> AvailableFormulas => _formulaProvider.AvailableFormulas;
 
     public IDamageFormula SelectedFormula
@@ -40,11 +45,23 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
         set => _formulaProvider.CurrentFormula = value;
     }
 
-    public FormulaEditorViewModel(IFormulaProvider formulaProvider, StatEditorViewModel statEditor)
+    public FormulaEditorViewModel(
+        IFormulaProvider formulaProvider,
+        ILocalizationService localizationService,
+        StatEditorViewModel statEditor)
     {
         _formulaProvider = formulaProvider;
+        _localizationService = localizationService;
         _statEditor = statEditor;
-        _formulaProvider.CurrentFormulaChanged += (_, _) => GenerateCurves();
+
+        _formulaProvider.CurrentFormulaChanged += (_, _) =>
+        {
+            UpdateDescription();
+            GenerateCurves();
+        };
+        _localizationService.CultureChanged += (_, _) => UpdateDescription();
+
+        UpdateDescription();
         GenerateCurves();
     }
 
@@ -86,5 +103,10 @@ public sealed partial class FormulaEditorViewModel : ViewModelBase
         DamageCurveY = damageY;
         TtkCurveX = ttkX;
         TtkCurveY = ttkY;
+    }
+
+    private void UpdateDescription()
+    {
+        SelectedFormulaDescription = _localizationService.GetString(_formulaProvider.CurrentFormula.Description);
     }
 }

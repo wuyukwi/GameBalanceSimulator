@@ -48,6 +48,8 @@ public partial class App : Application
 
         services.AddSingleton<IDamageFormula, SubtractiveDamageFormula>();
         services.AddSingleton<IDamageFormula, MultiplicativeDamageFormula>();
+        services.AddSingleton<IDamageFormula, PercentageReductionDamageFormula>();
+        services.AddSingleton<IDamageFormula, TrueDamageFormula>();
 
         services.AddSingleton<IFormulaProvider>(provider =>
             new FormulaProvider(provider.GetServices<IDamageFormula>()));

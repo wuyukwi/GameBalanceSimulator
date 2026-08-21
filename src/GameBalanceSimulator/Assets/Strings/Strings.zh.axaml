@@ -40,5 +40,11 @@
     <system:String x:Key="Settings_Language">语言</system:String>
 
     <system:String x:Key="Formula_Subtractive">减算模型</system:String>
+    <system:String x:Key="Formula_Subtractive_Description">经典减算模型：伤害 = max(1, 攻击力 - 有效防御力)。</system:String>
     <system:String x:Key="Formula_Multiplicative">乘算模型</system:String>
+    <system:String x:Key="Formula_Multiplicative_Description">除法模型：伤害 = 攻击^2 / (攻击 + 有效防御力)，最低为 1。</system:String>
+    <system:String x:Key="Formula_PercentageReduction">百分比减伤</system:String>
+    <system:String x:Key="Formula_PercentageReduction_Description">百分比减伤：伤害 = 攻击 * (1 - 防御 / (防御 + 100))，最低保留 10%。</system:String>
+    <system:String x:Key="Formula_TrueDamage">真实伤害</system:String>
+    <system:String x:Key="Formula_TrueDamage_Description">真实伤害：完全无视防御与穿透。</system:String>
 </ResourceDictionary>

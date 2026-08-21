@@ -7,6 +7,8 @@ public interface IDamageFormula
 {
     string Name { get; }
 
+    string Description { get; }
+
     /// <summary>
     /// Calculates a single stochastic damage roll.
     /// </summary>

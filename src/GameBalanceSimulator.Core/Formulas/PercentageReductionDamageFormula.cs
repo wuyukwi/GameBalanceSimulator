@@ -4,13 +4,13 @@ using GameBalanceSimulator.Core.Services;
 namespace GameBalanceSimulator.Core.Formulas;
 
 /// <summary>
-/// Subtractive armor model: Damage = max(1, Attack - max(0, Defense - Penetration))
+/// Percentage reduction armor model: damage scales down as effective defense grows.
 /// </summary>
-public sealed class SubtractiveDamageFormula : IDamageFormula
+public sealed class PercentageReductionDamageFormula : IDamageFormula
 {
-    public string Name => "Subtractive";
+    public string Name => "PercentageReduction";
 
-    public string Description => "Formula_Subtractive_Description";
+    public string Description => "Formula_PercentageReduction_Description";
 
     public DamageResult Calculate(StatBlock attacker, StatBlock defender, IRandomProvider random)
     {
@@ -30,6 +30,10 @@ public sealed class SubtractiveDamageFormula : IDamageFormula
     public double CalculateBase(StatBlock attacker, StatBlock defender)
     {
         var effectiveDefense = Math.Max(0, defender.Defense - attacker.ArmorPenetration);
-        return Math.Max(1, attacker.BaseAttack - effectiveDefense);
+        const double reductionScale = 100.0;
+        var reduction = effectiveDefense / (effectiveDefense + reductionScale);
+        var multiplier = Math.Max(0.1, 1.0 - reduction);
+
+        return Math.Max(1, attacker.BaseAttack * multiplier);
     }
 }

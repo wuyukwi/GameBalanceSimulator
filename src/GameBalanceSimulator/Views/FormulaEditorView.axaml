@@ -13,6 +13,10 @@
       <ComboBox ItemsSource="{Binding AvailableFormulas}"
                 SelectedItem="{Binding SelectedFormula}"
                 DisplayMemberBinding="{Binding Name}" />
+      <TextBlock Text="{Binding SelectedFormulaDescription}"
+                 TextWrapping="Wrap"
+                 FontSize="12"
+                 Opacity="0.8" />
       <Grid ColumnDefinitions="*,*,*">
         <StackPanel Grid.Column="0" Margin="0 0 4 0">
           <TextBlock Text="{DynamicResource FormulaEditor_DefenseMin}" />

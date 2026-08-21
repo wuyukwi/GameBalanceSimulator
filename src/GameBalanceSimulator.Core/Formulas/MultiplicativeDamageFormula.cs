@@ -10,6 +10,8 @@ public sealed class MultiplicativeDamageFormula : IDamageFormula
 {
     public string Name => "Multiplicative";
 
+    public string Description => "Formula_Multiplicative_Description";
+
     public DamageResult Calculate(StatBlock attacker, StatBlock defender, IRandomProvider random)
     {
         var isDodged = random.NextDouble() < defender.DodgeRate;

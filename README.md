@@ -16,10 +16,12 @@ Game Balance Simulator helps you explore how different stats and damage formulas
 - **Damage Formula Presets**:
   - Subtractive armor model: `Damage = max(1, Attack - max(0, Defense - Penetration))`
   - Multiplicative armor model: `Damage = Attack * Attack / (Attack + max(0, Defense - Penetration))`
-  - Percentage reduction model: `Damage = Attack * max(0.1, 1 - Defense / (Defense + 100))`
+  - Percentage reduction model: `Damage = Attack * max(0.1, 1 - Defense / (Defense + Scale))` (scale is customizable)
   - True damage model: ignores defense and armor penetration
+- **Formula Parameter Customization**: Tunable formula parameters appear dynamically in the UI; adjusting them updates the curves immediately.
 - **Formula Visualization**: Plot expected damage and time-to-kill (TTK) curves as defense varies, with a localized formula description shown in the UI.
 - **Monte Carlo Simulation**: Run thousands of combat iterations to obtain statistical results including average damage, max/min damage, average TTK, critical rate, and dodge rate. Results include a damage distribution histogram.
+- **Export Report**: Generate a Markdown report containing stats, formula parameters, curve data, simulation results, and the damage histogram via `File > Export Report`.
 - **Save / Load Configuration**: Persist and restore simulation setups through the File menu.
 - **Input Validation**: All numeric inputs use range validation via `ObservableValidator`.
 - **Multilingual UI**: Supports English, Chinese, and Japanese with runtime language switching. New languages can be added by adding a resource dictionary.

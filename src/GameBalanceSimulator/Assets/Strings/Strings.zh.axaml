@@ -6,6 +6,7 @@
     <system:String x:Key="Menu_File">文件</system:String>
     <system:String x:Key="Menu_SaveConfig">保存配置</system:String>
     <system:String x:Key="Menu_LoadConfig">加载配置</system:String>
+    <system:String x:Key="Menu_ExportReport">导出报告</system:String>
 
     <system:String x:Key="StatEditor_Attacker">攻击方</system:String>
     <system:String x:Key="StatEditor_Defender">防御方</system:String>

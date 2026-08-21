@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using GameBalanceSimulator.Core.Formulas;
 using GameBalanceSimulator.Core.Persistence;
+using GameBalanceSimulator.Core.Reporting;
 using GameBalanceSimulator.Core.Services;
 using GameBalanceSimulator.Services;
 using GameBalanceSimulator.ViewModels.Services;
@@ -66,6 +67,7 @@ public partial class App : Application
 
         services.AddSingleton<IDialogService, AvaloniaDialogService>();
         services.AddSingleton<ISimulationConfigRepository, JsonConfigRepository>();
+        services.AddSingleton<IReportExporter, MarkdownReportExporter>();
 
         services.AddSingleton<StatEditorViewModel>();
         services.AddSingleton<FormulaEditorViewModel>();

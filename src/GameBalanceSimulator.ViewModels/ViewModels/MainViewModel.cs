@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using GameBalanceSimulator.Core.Formulas;
 using GameBalanceSimulator.Core.Models;
 using GameBalanceSimulator.Core.Persistence;
+using GameBalanceSimulator.Core.Reporting;
 using GameBalanceSimulator.Core.Services;
 using GameBalanceSimulator.ViewModels.Services;
 
@@ -12,6 +13,7 @@ public sealed partial class MainViewModel : ViewModelBase
 {
     private readonly IDialogService _dialogService;
     private readonly IFormulaProvider _formulaProvider;
+    private readonly IReportExporter _reportExporter;
     private readonly ISimulationConfigRepository _repository;
 
     [ObservableProperty]
@@ -29,6 +31,7 @@ public sealed partial class MainViewModel : ViewModelBase
     public MainViewModel(
         IDialogService dialogService,
         IFormulaProvider formulaProvider,
+        IReportExporter reportExporter,
         ISimulationConfigRepository repository,
         StatEditorViewModel statEditor,
         FormulaEditorViewModel formulaEditor,
@@ -37,6 +40,7 @@ public sealed partial class MainViewModel : ViewModelBase
     {
         _dialogService = dialogService;
         _formulaProvider = formulaProvider;
+        _reportExporter = reportExporter;
         _repository = repository;
         _statEditor = statEditor;
         _formulaEditor = formulaEditor;
@@ -90,6 +94,46 @@ public sealed partial class MainViewModel : ViewModelBase
 
         ApplyConfig(config);
         await _dialogService.ShowInfoAsync("Configuration loaded successfully.", "Load Configuration");
+    }
+
+    [RelayCommand]
+    private async Task ExportReportAsync()
+    {
+        var path = await _dialogService.ShowSaveFileAsync("Export Report", "Markdown files (*.md)|*.md");
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            return;
+        }
+
+        if (!path.EndsWith(_reportExporter.Extension, StringComparison.OrdinalIgnoreCase))
+        {
+            path += _reportExporter.Extension;
+        }
+
+        var reportData = new ReportData(
+            DateTime.Now,
+            StatEditor.Attacker.ToModel(),
+            StatEditor.Defender.ToModel(),
+            _formulaProvider.CurrentFormula,
+            FormulaEditor.DefenseMin,
+            FormulaEditor.DefenseMax,
+            FormulaEditor.DefenseStep,
+            FormulaEditor.DamageCurveX,
+            FormulaEditor.DamageCurveY,
+            FormulaEditor.TtkCurveX,
+            FormulaEditor.TtkCurveY,
+            new SimulationConfig(
+                StatEditor.Attacker.ToModel(),
+                StatEditor.Defender.ToModel(),
+                Simulation.IterationCount,
+                _formulaProvider.CurrentFormula.Name,
+                Simulation.SimulateUntilDeath,
+                Simulation.Seed),
+            Simulation.Report);
+
+        var content = _reportExporter.Export(reportData);
+        await File.WriteAllTextAsync(path, content);
+        await _dialogService.ShowInfoAsync($"Report exported to:\n{path}", "Export Report");
     }
 
     private void ApplyConfig(SimulationConfig config)

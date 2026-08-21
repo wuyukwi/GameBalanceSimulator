@@ -6,6 +6,7 @@
     <system:String x:Key="Menu_File">ファイル</system:String>
     <system:String x:Key="Menu_SaveConfig">設定を保存</system:String>
     <system:String x:Key="Menu_LoadConfig">設定を読み込む</system:String>
+    <system:String x:Key="Menu_ExportReport">レポートを出力</system:String>
 
     <system:String x:Key="StatEditor_Attacker">攻撃側</system:String>
     <system:String x:Key="StatEditor_Defender">防御側</system:String>

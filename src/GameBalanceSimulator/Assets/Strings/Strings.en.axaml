@@ -6,6 +6,7 @@
     <system:String x:Key="Menu_File">File</system:String>
     <system:String x:Key="Menu_SaveConfig">Save Configuration</system:String>
     <system:String x:Key="Menu_LoadConfig">Load Configuration</system:String>
+    <system:String x:Key="Menu_ExportReport">Export Report</system:String>
 
     <system:String x:Key="StatEditor_Attacker">Attacker</system:String>
     <system:String x:Key="StatEditor_Defender">Defender</system:String>

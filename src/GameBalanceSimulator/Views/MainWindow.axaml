@@ -17,6 +17,8 @@
       <MenuItem Header="{DynamicResource Menu_File}">
         <MenuItem Header="{DynamicResource Menu_SaveConfig}" Command="{Binding SaveConfigCommand}" />
         <MenuItem Header="{DynamicResource Menu_LoadConfig}" Command="{Binding LoadConfigCommand}" />
+        <Separator />
+        <MenuItem Header="{DynamicResource Menu_ExportReport}" Command="{Binding ExportReportCommand}" />
       </MenuItem>
     </Menu>
 

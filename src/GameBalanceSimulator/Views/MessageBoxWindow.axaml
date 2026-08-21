@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="GameBalanceSimulator.Views.MessageBoxWindow"
+        Width="420"
+        MinWidth="300"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+  <StackPanel Margin="20" Spacing="16">
+    <TextBlock x:Name="MessageText" TextWrapping="Wrap" />
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+      <Button x:Name="YesButton" Content="Yes" IsVisible="False" Click="YesButton_Click" />
+      <Button x:Name="NoButton" Content="No" IsVisible="False" Click="NoButton_Click" />
+      <Button x:Name="OkButton" Content="OK" IsVisible="False" Click="OkButton_Click" />
+    </StackPanel>
+  </StackPanel>
+</Window>

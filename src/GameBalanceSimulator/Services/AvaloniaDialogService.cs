@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using GameBalanceSimulator.ViewModels.Services;
+using GameBalanceSimulator.Views;
 
 namespace GameBalanceSimulator.Services;
 
@@ -18,16 +19,26 @@ public sealed class AvaloniaDialogService : IDialogService
         return null;
     }
 
-    public Task ShowInfoAsync(string message, string? title = null)
+    public async Task ShowInfoAsync(string message, string? title = null)
     {
-        // Placeholder: implement a dedicated message-box window when UI polish is needed.
-        return Task.CompletedTask;
+        var mainWindow = GetMainWindow();
+        if (mainWindow is null)
+        {
+            return;
+        }
+
+        await MessageBoxWindow.ShowInfoAsync(mainWindow, message, title ?? string.Empty);
     }
 
-    public Task<bool> ShowConfirmAsync(string message, string? title = null)
+    public async Task<bool> ShowConfirmAsync(string message, string? title = null)
     {
-        // Placeholder: implement a dedicated confirm dialog when UI polish is needed.
-        return Task.FromResult(true);
+        var mainWindow = GetMainWindow();
+        if (mainWindow is null)
+        {
+            return false;
+        }
+
+        return await MessageBoxWindow.ShowConfirmAsync(mainWindow, message, title ?? string.Empty);
     }
 
     public async Task<string?> ShowOpenFileAsync(string title, string filter)
